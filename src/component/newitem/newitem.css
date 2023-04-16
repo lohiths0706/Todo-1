@@ -1,0 +1,80 @@
+.new-item-card{
+    display: flex;
+    padding: 25px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 7px 20px rgba(211,211,211,0.4);
+    margin-bottom: 50px;
+}
+
+.new-item-card .checkbox{
+    margin-right: 20px;
+}
+
+.new-item-card input{
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid black;
+    font-size: 20px;
+    padding: 10px 0;
+}
+
+.new-item-card input:focus{
+    outline: none;
+    border-width: 2px;
+}
+.new-item-card .form-container{
+    flex-grow: 1;
+}
+.btn-container{
+    display: flex;
+    gap:10px;
+    margin-top:20px;
+    padding:10px 30px;
+}
+.btn-container button{
+    padding:10px 30px;
+    border-radius:5px;
+    border:none;
+    cursor: pointer;
+    transition: all 0.2 ease-in;
+}
+.btn-container button.primary{
+    background-color: yellow;
+}
+.btn-container button.red{
+    background-color: red;
+}
+
+.btn-container button:hover{
+    box-shadow: 2px 10px 15px #aaa;
+}
+.badge-container{
+    display: flex;
+    margin-top: 15px;
+    gap:10px
+}
+.badge-container .p-badge{
+    border:1px solid #aaa;
+    border-radius: 10px;
+    cursor: pointer;
+    width: 70px;
+    padding:4px 10px;
+    text-align: center;
+}
+.badge-container .p-badge.selected{
+    outline: 2px solid black;
+}
+
+.badge-container .p-badge.high{
+    background-color: red;
+}
+
+
+.badge-container .p-badge.medium{
+    background-color: yellow;
+}
+.badge-container .p-badge.low{
+    background-color: lightgreen;
+}
+

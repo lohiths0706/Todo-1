@@ -1,0 +1,16 @@
+.title{
+    text-align: center;
+    margin-bottom: 20px;
+}
+h1,body,html{
+    margin: 0;
+}
+#root{
+    background-color: skyblue;
+    height: 100vh;
+}
+.app{
+    padding: 20px;
+    max-width: 630px;
+    margin: 0 auto;
+}
