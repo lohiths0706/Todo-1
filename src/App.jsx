@@ -40,11 +40,15 @@ function App() {
     const triggerEdit=(item)=>{
       setEditState(item)
     }
+    const editItem=(updatedItem)=>{
+      const updatedList=list.map((item)=>(item.id===updatedItem.id)?updatedItem:item)
+      setList([...updatedList])
+    }
     
   return(
     <div className='app'>
     <h1 className="title">To-Do List</h1>
-    <NewItem addItem={addItem} editState={editState} />
+    <NewItem addItem={addItem} editState={editState} editItem={editItem} />
     <Todolist list={list} deleteItem={deleteItem} triggerEdit={triggerEdit}/>
     </div>
   )

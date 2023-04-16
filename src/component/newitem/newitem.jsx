@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import "./newitem.css"
 const PRIORITY=['low','medium','high']
 const NewItem=(props)=>{
-    const {addItem,editState}=props
+    const {addItem,editState,editItem}=props
     const [title,setTitle]=useState('');
     const [priority,setPriority]=useState('')
     const isEdit=Boolean(editState.id)
@@ -24,7 +24,13 @@ const NewItem=(props)=>{
             title,
             priority:priority
         }
-        addItem(obj)
+        if(isEdit)
+        {
+            obj.id=editState.id
+            editItem(obj)
+        }
+        else
+        {addItem(obj)}
         setPriority('')
         setTitle('')
     }
@@ -36,7 +42,7 @@ const NewItem=(props)=>{
         <div className="new-item-card">
             <div className="checkbox" />
             <div className="form-container">
-                <input placeholder="Type here ..." value={title} onChange={handleInput} />
+                <input placeholder="Type here ..."  onChange={handleInput}value={title} />
                 
                 {title&&(<><div className="badge-container">{PRIORITY.map((p)=>
                     <div key={p} className={`p-badge ${p} ${p===priority && 'selected'}`} onClick={()=>setPriority(p)}>{p}</div>
