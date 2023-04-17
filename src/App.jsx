@@ -1,49 +1,53 @@
 import './App.css'
 import NewItem from './component/newitem/newitem'
 import Todolist from './component/todolist/Todolist'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import {nanoid} from 'nanoid'
-const DEFAULT_LIST=[
-  {
-      title:'study js',
-      priority:'high',
-      id:nanoid()
-  },
-  {
-      title:'study css',
-      priority:'low',
-      id:nanoid()
-
-  },
-  {
-      title:'study html',
-      priority:'medium',
-      id:nanoid()
-
-  }
-]
-console.log(DEFAULT_LIST)
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+toast.configure()
 function App() {
-  
-  const [list,setList]=useState(DEFAULT_LIST)
+  const [list,setList]=useState([])
   const [editState,setEditState]=useState({})
+  useEffect(()=>{
+    fetch("http://localhost:3000/")
+    .then((res)=>{
+      res.json().then((json)=>{
+        setList(json)
+      }).catch(()=>{console.log("error")})
+    })
+  },[editState])
   console.log(editState)
 
     const deleteItem=(id)=>{
-        const filterList=list.filter((item)=>item.id!==id)
-        setList([...filterList])
+      fetch("http://localhost:3000/"+id,{
+        method:'DELETE',
+      }).then(()=>{
+        setEditState({})
+        toast.success("deleted")})
+        
     }
     const addItem=(item)=>{
-      item.id=nanoid()
-      setList((prev)=>[item,...prev])
-    }
+      // item.id=nanoid()
+      fetch('http://localhost:3000/',{
+        method:'POST',
+        headers:{'Content-type':'application/json'},
+        body:JSON.stringify(item)
+
+      }).then((res)=>{
+        res.json().then(setList((prev)=>[item,...prev]) )
+      toast.success("succes")
+    })}
     const triggerEdit=(item)=>{
       setEditState(item)
     }
     const editItem=(updatedItem)=>{
-      const updatedList=list.map((item)=>(item.id===updatedItem.id)?updatedItem:item)
-      setList([...updatedList])
-    }
+      fetch("http://localhost:3000/"+updatedItem.id,{method:'PUT',headers:{'Accept':'application/json,text/plain,*/*','Content-type':'application/json'},body:JSON.stringify(updatedItem)})
+      .then(()=>setEditState({})).catch((err)=>
+        console.log(err)
+      )
+      }
+    
     
   return(
     <div className='app'>

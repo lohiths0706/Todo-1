@@ -5,12 +5,12 @@ const NewItem=(props)=>{
     const {addItem,editState,editItem}=props
     const [title,setTitle]=useState('');
     const [priority,setPriority]=useState('')
-    const isEdit=Boolean(editState.id)
+    const isEdit=Boolean(editState._id)
     const handleInput=(e)=>{
         setTitle(e.target.value)
     }
     useEffect(()=>{
-        if(editState.id)
+        if(editState._id)
         {
             setTitle(editState.title)
             setPriority(editState.priority)
@@ -26,7 +26,7 @@ const NewItem=(props)=>{
         }
         if(isEdit)
         {
-            obj.id=editState.id
+            obj.id=editState._id
             editItem(obj)
         }
         else

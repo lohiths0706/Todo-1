@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./Todolistitem.css"
 const Todolistitem=(props)=>{
     const {item,onEdit,onDelete,index}=props;
-    const {title,priority ,id}=item
+    const {title,priority ,_id}=item
     const [isChecked,setChecked]=useState(false)
     // const setTrue=(setChecked(true))
     return(<>
@@ -13,9 +13,9 @@ const Todolistitem=(props)=>{
             <div className={`card-title ${isChecked ? "strike":""}`}>{title}</div>
             <div className={"badge"}> {priority}
         </div>
-        <span class="material-symbols-outlined edit" onClick={()=>onEdit(item)}>edit</span>
+        <span className="material-symbols-outlined edit" onClick={()=>onEdit(item)}>edit</span>
 
-        <span class="material-symbols-outlined del" onClick={()=>onDelete(id)}>delete</span>
+        <span className="material-symbols-outlined del" onClick={()=>onDelete(_id)}>delete</span>
         </div>
         </>
     )
